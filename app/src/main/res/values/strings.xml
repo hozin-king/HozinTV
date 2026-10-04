@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">HozinTV</string>
+    <string name="playlist_source">Sumber Playlist</string>
+    <string name="search_hint">Cari channel…</string>
+    <string name="empty_channels">Belum ada channel.\nTarik untuk memuat ulang atau pilih playlist lain.</string>
+    <string name="load_failed">Gagal memuat playlist.\nPeriksa koneksi lalu coba lagi.</string>
+    <string name="refresh">Muat ulang</string>
+    <string name="add_playlist">Tambah playlist</string>
+    <string name="channel_logo">Logo channel</string>
+    <string name="prev_channel">Channel sebelumnya</string>
+    <string name="next_channel">Channel berikutnya</string>
+</resources>
