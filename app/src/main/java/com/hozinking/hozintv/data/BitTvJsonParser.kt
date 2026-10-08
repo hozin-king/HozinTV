@@ -42,6 +42,8 @@ object BitTvJsonParser {
     private fun detectStreamType(url: String): String? = when {
         url.contains(".mpd", ignoreCase = true) -> "dash"
         url.contains(".m3u8", ignoreCase = true) -> "hls"
+        // trik HLS yang disamarkan: playlist .m3u8 diserve sebagai master.txt
+        url.contains("master.txt", ignoreCase = true) -> "hls"
         else -> null
     }
 }

@@ -182,6 +182,7 @@ class MainActivity : AppCompatActivity() {
             "dash" -> MimeTypes.APPLICATION_MPD
             else -> when {
                 ch.url.contains(".m3u8", ignoreCase = true) -> MimeTypes.APPLICATION_M3U8
+                ch.url.contains("master.txt", ignoreCase = true) -> MimeTypes.APPLICATION_M3U8
                 ch.url.contains(".mpd", ignoreCase = true) -> MimeTypes.APPLICATION_MPD
                 else -> null
             }
