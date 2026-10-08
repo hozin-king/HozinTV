@@ -88,7 +88,7 @@ class MainActivity : AppCompatActivity() {
         binding.btnQualityMini.setOnClickListener { showQualityDialog() }
         binding.btnVolume.setOnClickListener { toggleMute() }
         binding.btnFullscreen.setOnClickListener { openFullscreen() }
-        binding.btnStop.setOnClickListener { resetPlayback() }
+        binding.btnStop.setOnClickListener { finishAffinity() }
         binding.emptyView.setOnClickListener { loadChannels() }
 
         val lastId = repo.getLastSourceId()
