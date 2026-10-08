@@ -28,7 +28,6 @@
                 app:resize_mode="fit"
                 app:show_buffering="when_playing"
                 app:controller_layout_id="@layout/exo_live_controller"
-                app:controller_auto_show="false"
                 app:use_controller="true" />
 
             <!-- Placeholder saat belum ada channel diputar -->

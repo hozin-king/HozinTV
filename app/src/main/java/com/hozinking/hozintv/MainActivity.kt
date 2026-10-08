@@ -82,6 +82,8 @@ class MainActivity : AppCompatActivity() {
             onHint = { showGestureHint(it) }
         )
         binding.miniPlayerView.setOnTouchListener(gestureHelper)
+        // Live: controller tidak auto-muncul (hanya play/pause manual)
+        binding.miniPlayerView.controllerAutoShow = false
 
         binding.btnFilter.setOnClickListener { showFilterDialog() }
         binding.btnSettings.setOnClickListener { showFeatureSettings() }

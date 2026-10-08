@@ -50,6 +50,8 @@ class PlayerActivity : AppCompatActivity() {
         binding.btnPrev.setOnClickListener { playChannel(index - 1) }
         binding.btnNext.setOnClickListener { playChannel(index + 1) }
         binding.playerView.setOnClickListener { /* controller bawaan yang handle */ }
+        // Live: controller tidak auto-muncul (hanya play/pause manual)
+        binding.playerView.controllerAutoShow = false
 
         playChannel(index)
     }
