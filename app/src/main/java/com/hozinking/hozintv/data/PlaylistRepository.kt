@@ -21,13 +21,6 @@ class PlaylistRepository(private val context: Context) {
 
     companion object {
         val BUILT_IN = listOf(
-            PlaylistSource("id", "\uD83C\uDDEE\uD83C\uDDE9 Indonesia", "https://iptv-org.github.io/iptv/countries/id.m3u"),
-            PlaylistSource("sports", "⚽ Sports", "https://iptv-org.github.io/iptv/categories/sports.m3u"),
-            PlaylistSource("movies", "\uD83C\uDFAC Movies", "https://iptv-org.github.io/iptv/categories/movies.m3u"),
-            PlaylistSource("news", "\uD83D\uDCF0 News", "https://iptv-org.github.io/iptv/categories/news.m3u"),
-            PlaylistSource("music", "\uD83C\uDFB5 Music", "https://iptv-org.github.io/iptv/categories/music.m3u"),
-            PlaylistSource("kids", "\uD83E\uDDD2 Kids", "https://iptv-org.github.io/iptv/categories/kids.m3u"),
-            PlaylistSource("all", "\uD83C\uDF0D Semua Channel", "https://iptv-org.github.io/iptv/index.m3u"),
             PlaylistSource("bittv", "\uD83D\uDCFA BitTV Sports", "https://cdn.jsdelivr.net/gh/duktektv/duktektv/bittv/SP.json"),
         )
         private const val PREFS = "hozintv"
@@ -69,7 +62,7 @@ class PlaylistRepository(private val context: Context) {
         } catch (e: Exception) { /* abaikan */ }
     }
 
-    fun getLastSourceId(): String = prefs.getString(KEY_LAST, "id") ?: "id"
+    fun getLastSourceId(): String = prefs.getString(KEY_LAST, "bittv") ?: "bittv"
     fun setLastSourceId(id: String) = prefs.edit().putString(KEY_LAST, id).apply()
 
     /** Download playlist (M3U atau JSON ala BitTV); kalau gagal dan ada cache, pakai cache. */
