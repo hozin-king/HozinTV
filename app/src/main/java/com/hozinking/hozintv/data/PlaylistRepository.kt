@@ -36,6 +36,7 @@ class PlaylistRepository(private val context: Context) {
             PlaylistSource("bittv-sa", "\uD83C\uDDF8\uD83C\uDDE6 Saudi", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/SA.json"),
             PlaylistSource("bittv-sp", "⚽ Sports", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/SP.json"),
             PlaylistSource("bittv-mi", "\uD83C\uDFAC Movies", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/MI.json"),
+            PlaylistSource("vod-movies", "\uD83C\uDFAC Film VOD", "https://raw.githubusercontent.com/Zaman-Topu/Ip-tv-Collection/main/FINAL_MOVIES_COMPLETE.m3u"),
             PlaylistSource("bittv-kd", "\uD83E\uDDD2 Kids", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/KD.json"),
             PlaylistSource("bittv-ev", "\uD83C\uDFAA Events", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/EV.json"),
         )

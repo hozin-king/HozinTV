@@ -55,6 +55,14 @@ object StreamFixes {
             url = "https://op-group1-swiftservehd-1.dens.tv/h/h40/index.m3u8",
             referer = REF_DENS, userAgent = UA_CHROME_120
         ),
+        "mycinema" to Fix(
+            url = "https://op-group1-swiftservehd-1.dens.tv/h/h192/index.m3u8",
+            referer = REF_DENS, userAgent = UA_CHROME_120
+        ),
+        "mycinemaasia" to Fix(
+            url = "https://op-group1-swiftservehd-1.dens.tv/h/h192/index.m3u8",
+            referer = REF_DENS, userAgent = UA_CHROME_120
+        ),
     )
 
     private fun norm(name: String): String =
