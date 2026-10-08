@@ -7,6 +7,7 @@ import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import coil.dispose
 import coil.load
 import coil.transform.RoundedCornersTransformation
 import com.hozinking.hozintv.R
@@ -36,11 +37,27 @@ class ChannelAdapter(
             binding.channelName.text = ch.name
             binding.channelGroup.text = ch.group ?: ""
             val radiusPx = binding.root.resources.displayMetrics.density * 12f
-            binding.channelLogo.load(ch.logo) {
-                crossfade(true)
-                transformations(RoundedCornersTransformation(radiusPx))
-                placeholder(R.drawable.ic_tv)
-                error(R.drawable.ic_tv)
+            val logo = ch.logo
+            if (logo != null && logo.startsWith("data:image")) {
+                // Logo base64 ala BitTV: decode manual (batalkan request Coil sebelumnya)
+                binding.channelLogo.dispose()
+                try {
+                    val bytes = android.util.Base64.decode(
+                        logo.substringAfter("base64,"), android.util.Base64.DEFAULT
+                    )
+                    val bmp = android.graphics.BitmapFactory.decodeByteArray(bytes, 0, bytes.size)
+                    if (bmp != null) binding.channelLogo.setImageBitmap(bmp)
+                    else binding.channelLogo.setImageResource(R.drawable.ic_tv)
+                } catch (_: Exception) {
+                    binding.channelLogo.setImageResource(R.drawable.ic_tv)
+                }
+            } else {
+                binding.channelLogo.load(logo) {
+                    crossfade(true)
+                    transformations(RoundedCornersTransformation(radiusPx))
+                    placeholder(R.drawable.ic_tv)
+                    error(R.drawable.ic_tv)
+                }
             }
             val selected = ch.url == selectedUrl
             binding.rowContent.setBackgroundColor(

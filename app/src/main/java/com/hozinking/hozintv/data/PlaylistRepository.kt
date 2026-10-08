@@ -28,6 +28,7 @@ class PlaylistRepository(private val context: Context) {
             PlaylistSource("music", "\uD83C\uDFB5 Music", "https://iptv-org.github.io/iptv/categories/music.m3u"),
             PlaylistSource("kids", "\uD83E\uDDD2 Kids", "https://iptv-org.github.io/iptv/categories/kids.m3u"),
             PlaylistSource("all", "\uD83C\uDF0D Semua Channel", "https://iptv-org.github.io/iptv/index.m3u"),
+            PlaylistSource("bittv", "\uD83D\uDCFA BitTV Sports", "https://cdn.jsdelivr.net/gh/duktektv/duktektv/bittv/SP.json"),
         )
         private const val PREFS = "hozintv"
         private const val KEY_CUSTOM = "custom_sources"
@@ -71,9 +72,9 @@ class PlaylistRepository(private val context: Context) {
     fun getLastSourceId(): String = prefs.getString(KEY_LAST, "id") ?: "id"
     fun setLastSourceId(id: String) = prefs.edit().putString(KEY_LAST, id).apply()
 
-    /** Download playlist; kalau gagal dan ada cache, pakai cache. */
+    /** Download playlist (M3U atau JSON ala BitTV); kalau gagal dan ada cache, pakai cache. */
     suspend fun loadChannels(source: PlaylistSource): List<Channel> = withContext(Dispatchers.IO) {
-        val cacheFile = File(context.cacheDir, "pl_${source.id}.m3u")
+        val cacheFile = File(context.cacheDir, "pl_${source.id}.cache")
         try {
             val conn = URL(source.url).openConnection() as HttpURLConnection
             conn.connectTimeout = 20000
@@ -82,12 +83,16 @@ class PlaylistRepository(private val context: Context) {
             conn.instanceFollowRedirects = true
             val text = conn.inputStream.bufferedReader().use { it.readText() }
             conn.disconnect()
-            if (!text.contains("#EXTM3U")) throw IllegalStateException("Bukan playlist M3U")
             cacheFile.writeText(text)
-            M3uParser.parse(text)
+            parseText(text)
         } catch (e: Exception) {
-            if (cacheFile.exists()) M3uParser.parse(cacheFile.readText())
+            if (cacheFile.exists()) parseText(cacheFile.readText())
             else throw e
         }
+    }
+
+    private fun parseText(text: String): List<Channel> {
+        return if (text.trimStart().startsWith("{")) BitTvJsonParser.parse(text)
+        else M3uParser.parse(text)
     }
 }
