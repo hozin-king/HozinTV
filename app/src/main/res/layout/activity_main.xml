@@ -6,14 +6,11 @@
     android:background="@color/background"
     android:orientation="vertical">
 
-    <!-- Mini player 16:9 ala BitTV -->
-    <com.google.android.material.card.MaterialCardView
+    <!-- Mini player 16:9 ala BitTV, mentok edge-to-edge -->
+    <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="12dp"
-        app:cardBackgroundColor="@android:color/black"
-        app:cardCornerRadius="12dp"
-        app:cardElevation="0dp">
+        android:background="@android:color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -30,6 +27,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:resize_mode="fit"
                 app:show_buffering="when_playing"
+                app:controller_layout_id="@layout/exo_live_controller"
+                app:controller_auto_show="false"
                 app:use_controller="true" />
 
             <!-- Placeholder saat belum ada channel diputar -->
@@ -152,7 +151,7 @@
                     android:visibility="gone" />
             </FrameLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.google.android.material.card.MaterialCardView>
+    </FrameLayout>
 
     <!-- Toolbar ala BitTV: logo | pill filter | gear | X -->
     <LinearLayout

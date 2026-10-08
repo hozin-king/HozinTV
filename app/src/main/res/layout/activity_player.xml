@@ -11,6 +11,8 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:use_controller="true"
+        app:controller_layout_id="@layout/exo_live_controller"
+        app:controller_auto_show="false"
         app:show_buffering="when_playing" />
 
     <TextView

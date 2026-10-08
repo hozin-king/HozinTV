@@ -26,6 +26,8 @@
     <string name="mute">Bisukan</string>
     <string name="unmute">Suarakan</string>
     <string name="stop_playback">Hentikan pemutaran</string>
+    <string name="play">Putar</string>
+    <string name="pause">Jeda</string>
     <string name="no_audio_tracks">Track audio belum tersedia.</string>
     <string name="tap_to_retry">Ketuk untuk coba lagi</string>
     <string name="playlist_m3u_title">Playlist M3U</string>
