@@ -57,6 +57,7 @@ class MainActivity : AppCompatActivity() {
     private var currentSource: PlaylistSource? = null
     private var activeCategory: String? = null
     private var currentChannel: Channel? = null
+    private var searchQuery: String = ""
 
     private val hintHandler = Handler(Looper.getMainLooper())
     private var hintRunnable: Runnable? = null
@@ -86,6 +87,14 @@ class MainActivity : AppCompatActivity() {
         binding.miniPlayerView.controllerAutoShow = false
 
         binding.btnFilter.setOnClickListener { showFilterDialog() }
+        binding.etSearch.addTextChangedListener(object : android.text.TextWatcher {
+            override fun beforeTextChanged(s: CharSequence?, st: Int, c: Int, a: Int) {}
+            override fun onTextChanged(s: CharSequence?, st: Int, b: Int, c: Int) {}
+            override fun afterTextChanged(s: android.text.Editable?) {
+                searchQuery = s?.toString()?.trim() ?: ""
+                applyFilters()
+            }
+        })
         binding.btnSettings.setOnClickListener { showFeatureSettings() }
         binding.btnQualityMini.setOnClickListener { showQualityDialog() }
         binding.btnVolume.setOnClickListener { toggleMute() }
@@ -267,6 +276,9 @@ class MainActivity : AppCompatActivity() {
     private fun applyFilters() {
         var list = allChannels
         activeCategory?.let { cat -> list = list.filter { it.group == cat } }
+        if (searchQuery.isNotEmpty()) {
+            list = list.filter { it.name.contains(searchQuery, ignoreCase = true) }
+        }
         adapter.submitList(list)
         binding.emptyView.visibility = if (list.isEmpty()) View.VISIBLE else View.GONE
         if (list.isNotEmpty()) binding.emptyView.text = getString(R.string.empty_channels)
@@ -281,6 +293,8 @@ class MainActivity : AppCompatActivity() {
         currentSource = source
         repo.setLastSourceId(source.id)
         activeCategory = null
+        searchQuery = ""
+        binding.etSearch.setText("")
         updateFilterButton()
         resetPlayback()
         loadChannels()
