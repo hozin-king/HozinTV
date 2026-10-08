@@ -99,7 +99,7 @@ class QualityDialog(
         }
     }
 
-    private fun collectTracks(@C.TrackType type: Int): List<TrackOpt> {
+    private fun collectTracks(type: Int): List<TrackOpt> {
         val info = trackSelector.currentMappedTrackInfo ?: return emptyList()
         val out = mutableListOf<TrackOpt>()
         for (r in 0 until info.rendererCount) {
@@ -115,7 +115,7 @@ class QualityDialog(
         return out
     }
 
-    private fun trackLabel(@C.TrackType type: Int, f: Format): String {
+    private fun trackLabel(type: Int, f: Format): String {
         return if (type == C.TRACK_TYPE_VIDEO) {
             val res = if (f.width > 0 && f.height > 0) "${f.width} × ${f.height}" else "?"
             val br = if (f.bitrate > 0) ", ${"%.2f".format(f.bitrate / 1_000_000.0)} Mbps" else ""

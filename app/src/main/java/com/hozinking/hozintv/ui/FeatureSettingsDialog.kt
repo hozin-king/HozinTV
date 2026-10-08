@@ -42,7 +42,8 @@ class FeatureSettingsDialog(
             .setView(binding.root)
             .create()
 
-        val adapter = PlaylistAdapter(
+        lateinit var adapter: PlaylistAdapter
+        adapter = PlaylistAdapter(
             onSelect = { src ->
                 currentSourceId = src.id
                 repo.setLastSourceId(src.id)
