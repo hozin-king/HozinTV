@@ -101,7 +101,9 @@ class PlaylistRepository(private val context: Context) {
     }
 
     private fun parseText(text: String): List<Channel> {
-        return if (text.trimStart().startsWith("{")) BitTvJsonParser.parse(text)
+        val list = if (text.trimStart().startsWith("{")) BitTvJsonParser.parse(text)
         else M3uParser.parse(text)
+        // Perbaiki stream yang diketahui mati/diblokir (URL pengganti + header khusus)
+        return StreamFixes.apply(list)
     }
 }

@@ -62,7 +62,7 @@ class PlayerActivity : AppCompatActivity() {
         releasePlayer()
 
         val dsFactory = DefaultHttpDataSource.Factory().apply {
-            setUserAgent(ch.userAgent ?: "Mozilla/5.0 (Linux; Android 10) HozinTV/1.0")
+            setUserAgent(ch.userAgent ?: "Mozilla/5.0 (Linux; Android 14; Pixel 8) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Mobile Safari/537.36")
             ch.referer?.let { setDefaultRequestProperties(mapOf("Referer" to it)) }
             setConnectTimeoutMs(15000)
             setReadTimeoutMs(15000)
