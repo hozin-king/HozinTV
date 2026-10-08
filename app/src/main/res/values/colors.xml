@@ -1,8 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="background">#101114</color>
-    <color name="surface">#1A1D23</color>
+    <color name="background">#16181F</color>
+    <color name="surface">#20242E</color>
     <color name="text_primary">#F2F3F5</color>
     <color name="text_secondary">#9AA0AA</color>
     <color name="accent">#E53935</color>
+    <color name="live_teal">#1FAA9C</color>
+    <color name="tab_accent">#A78BFA</color>
+    <color name="row_selected">#262B36</color>
+    <color name="divider">#2A2E38</color>
 </resources>

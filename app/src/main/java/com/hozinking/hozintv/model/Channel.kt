@@ -8,5 +8,8 @@ data class Channel(
     val logo: String?,
     val group: String?,
     val userAgent: String?,
-    val referer: String?
+    val referer: String?,
+    val drmType: String? = null,
+    val drmLicenseUrl: String? = null,
+    val streamType: String? = null
 ) : Serializable

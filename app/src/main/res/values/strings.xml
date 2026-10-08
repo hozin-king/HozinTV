@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">HozinTV</string>
-    <string name="playlist_source">Sumber Playlist</string>
     <string name="search_hint">Cari channel…</string>
     <string name="empty_channels">Belum ada channel.\nTarik untuk memuat ulang atau pilih playlist lain.</string>
     <string name="load_failed">Gagal memuat playlist.\nPeriksa koneksi lalu coba lagi.</string>
@@ -10,4 +9,54 @@
     <string name="channel_logo">Logo channel</string>
     <string name="prev_channel">Channel sebelumnya</string>
     <string name="next_channel">Channel berikutnya</string>
+
+    <!-- BitTV-style -->
+    <string name="live">LIVE</string>
+    <string name="filter">Filter</string>
+    <string name="search">Cari</string>
+    <string name="settings">Pengaturan</string>
+    <string name="quality">Kualitas</string>
+    <string name="fullscreen">Layar penuh</string>
+    <string name="all_categories">Semua</string>
+    <string name="tab_category">Kategori</string>
+    <string name="tab_playlist">Playlist</string>
+    <string name="tab_region">Region</string>
+    <string name="tab_video">Video</string>
+    <string name="tab_audio">Audio</string>
+    <string name="mute">Bisukan</string>
+    <string name="unmute">Suarakan</string>
+    <string name="stop_playback">Hentikan pemutaran</string>
+    <string name="no_audio_tracks">Track audio belum tersedia.</string>
+    <string name="tap_to_retry">Ketuk untuk coba lagi</string>
+    <string name="playlist_m3u_title">Playlist M3U</string>
+    <string name="add_playlist_url">＋ Tambah URL M3U</string>
+    <string name="cancel">Batal</string>
+    <string name="apply">Apply</string>
+    <string name="save">Simpan</string>
+    <string name="delete">Hapus</string>
+    <string name="filter_title">Filter Channel</string>
+    <string name="add_playlist_new">＋ Tambah playlist baru</string>
+    <string name="delete_playlist_title">Hapus playlist?</string>
+    <string name="delete_playlist_msg">&quot;%1$s&quot; akan dihapus dari daftar.</string>
+    <string name="feature_settings_title">Pengaturan Fitur</string>
+    <string name="pip_title">Picture-in-Picture</string>
+    <string name="pip_desc">Izinkan video tetap berjalan melayang saat keluar aplikasi</string>
+    <string name="gesture_title">Gesture Swipe Layar</string>
+    <string name="gesture_desc">Geser vertikal: kanan = volume, kiri = kecerahan</string>
+    <string name="secure_title">Blokir screenshot/rekaman</string>
+    <string name="secure_desc">Aktifkan FLAG_SECURE (layar hitam saat screenshot)</string>
+    <string name="quality_title">Kualitas Video</string>
+    <string name="quality_auto">Otomatis</string>
+    <string name="no_tracks">Track video belum tersedia.\nTunggu hingga video mulai diputar.</string>
+    <string name="select_channel_hint">Pilih channel untuk menonton</string>
+    <string name="builtin_tag">Bawaan</string>
+    <string name="custom_tag">Custom</string>
+    <string name="add_source_title">Tambah Playlist M3U</string>
+    <string name="add_source_name_hint">Nama (mis. Playlist Saya)</string>
+    <string name="add_source_url_hint">URL M3U (https://…)</string>
+    <string name="invalid_url">URL tidak valid</string>
+    <string name="source_added">Playlist ditambahkan</string>
+    <string name="source_deleted">Playlist dihapus</string>
+    <string name="play_error">Gagal memutar (%1$s)</string>
+    <string name="empty_list">Daftar channel kosong</string>
 </resources>

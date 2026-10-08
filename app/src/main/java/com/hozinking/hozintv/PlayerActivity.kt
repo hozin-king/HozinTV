@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.core.view.WindowInsetsControllerCompat
+import androidx.media3.common.C
 import androidx.media3.common.MediaItem
 import androidx.media3.common.MimeTypes
 import androidx.media3.common.PlaybackException
@@ -71,14 +72,7 @@ class PlayerActivity : AppCompatActivity() {
             .build()
             .also { exo ->
                 binding.playerView.player = exo
-                val mime = when {
-                    ch.url.contains(".m3u8", ignoreCase = true) -> MimeTypes.APPLICATION_M3U8
-                    ch.url.contains(".mpd", ignoreCase = true) -> MimeTypes.APPLICATION_MPD
-                    else -> null
-                }
-                val item = MediaItem.Builder().setUri(ch.url).apply {
-                    mime?.let { setMimeType(it) }
-                }.build()
+                exo.setMediaItem(buildMediaItem(ch))
                 exo.addListener(object : Player.Listener {
                     override fun onPlayerError(error: PlaybackException) {
                         Toast.makeText(
@@ -87,13 +81,39 @@ class PlayerActivity : AppCompatActivity() {
                             Toast.LENGTH_SHORT
                         ).show()
                     }
+
+                    override fun onIsPlayingChanged(isPlaying: Boolean) {
+                        binding.liveBadge.visibility = if (isPlaying) View.VISIBLE else View.GONE
+                    }
                 })
-                exo.setMediaItem(item)
                 exo.prepare()
                 exo.play()
             }
 
         showChannelName(ch.name)
+    }
+
+    /** Rakit MediaItem: deteksi HLS/DASH + pasang DRM Widevine bila ada di M3U. */
+    private fun buildMediaItem(ch: Channel): MediaItem {
+        val mime = when (ch.streamType) {
+            "hls" -> MimeTypes.APPLICATION_M3U8
+            "dash" -> MimeTypes.APPLICATION_MPD
+            else -> when {
+                ch.url.contains(".m3u8", ignoreCase = true) -> MimeTypes.APPLICATION_M3U8
+                ch.url.contains(".mpd", ignoreCase = true) -> MimeTypes.APPLICATION_MPD
+                else -> null
+            }
+        }
+        val builder = MediaItem.Builder().setUri(ch.url)
+        mime?.let { builder.setMimeType(it) }
+        if (ch.drmType == "widevine" && !ch.drmLicenseUrl.isNullOrBlank()) {
+            builder.setDrmConfiguration(
+                MediaItem.DrmConfiguration.Builder(C.WIDEVINE_UUID)
+                    .setLicenseUri(ch.drmLicenseUrl)
+                    .build()
+            )
+        }
+        return builder.build()
     }
 
     private fun showChannelName(name: String) {
