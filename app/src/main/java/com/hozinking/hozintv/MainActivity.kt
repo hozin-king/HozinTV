@@ -98,6 +98,35 @@ class MainActivity : AppCompatActivity() {
         updateFilterButton()
 
         loadChannels()
+
+        scheduleNewChannelCheck()
+        requestNotificationPermission()
+    }
+
+    /** Minta izin notifikasi (Android 13+) untuk info channel baru. */
+    private fun requestNotificationPermission() {
+        if (android.os.Build.VERSION.SDK_INT >= 33) {
+            val perm = android.Manifest.permission.POST_NOTIFICATIONS
+            if (checkSelfPermission(perm) != android.content.pm.PackageManager.PERMISSION_GRANTED) {
+                requestPermissions(arrayOf(perm), 1001)
+            }
+        }
+    }
+
+    /** Jadwalkan cek channel baru tiap 6 jam, jalan walau aplikasi ditutup. */
+    private fun scheduleNewChannelCheck() {
+        val req = androidx.work.PeriodicWorkRequestBuilder<com.hozinking.hozintv.data.NewChannelWorker>(
+            6, java.util.concurrent.TimeUnit.HOURS
+        ).setConstraints(
+            androidx.work.Constraints.Builder()
+                .setRequiredNetworkType(androidx.work.NetworkType.CONNECTED)
+                .build()
+        ).build()
+        androidx.work.WorkManager.getInstance(this).enqueueUniquePeriodicWork(
+            "new_channel_check",
+            androidx.work.ExistingPeriodicWorkPolicy.KEEP,
+            req
+        )
     }
 
     // ---------------- mini player ----------------

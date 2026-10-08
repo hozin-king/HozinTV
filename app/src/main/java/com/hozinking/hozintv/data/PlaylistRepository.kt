@@ -20,8 +20,24 @@ data class PlaylistSource(
 class PlaylistRepository(private val context: Context) {
 
     companion object {
+        // Daftar channel format JSON ala BitTV (brodatv1/jsonp/mio)
         val BUILT_IN = listOf(
-            PlaylistSource("bittv", "\uD83D\uDCFA BitTV Sports", "https://cdn.jsdelivr.net/gh/duktektv/duktektv/bittv/SP.json"),
+            PlaylistSource("bittv-id", "\uD83C\uDDEE\uD83C\uDDE9 Indonesia", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/ID.json"),
+            PlaylistSource("bittv-lo", "\uD83D\uDCFA TV Lokal", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/LO.json"),
+            PlaylistSource("bittv-ri", "\uD83D\uDCFA TVRI", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/RI.json"),
+            PlaylistSource("bittv-my", "\uD83C\uDDF2\uD83C\uDDFE Malaysia", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/MY.json"),
+            PlaylistSource("bittv-sg", "\uD83C\uDDF8\uD83C\uDDEC Singapore", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/SG.json"),
+            PlaylistSource("bittv-th", "\uD83C\uDDF9\uD83C\uDDED Thailand", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/TH.json"),
+            PlaylistSource("bittv-jp", "\uD83C\uDDEF\uD83C\uDDF5 Japan", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/JP.json"),
+            PlaylistSource("bittv-kr", "\uD83C\uDDF0\uD83C\uDDF7 Korea", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/KR.json"),
+            PlaylistSource("bittv-au", "\uD83C\uDDE6\uD83C\uDDFA Australia", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/AU.json"),
+            PlaylistSource("bittv-gb", "\uD83C\uDDEC\uD83C\uDDE7 UK", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/GB.json"),
+            PlaylistSource("bittv-br", "\uD83C\uDDE7\uD83C\uDDF7 Brazil", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/BR.json"),
+            PlaylistSource("bittv-sa", "\uD83C\uDDF8\uD83C\uDDE6 Saudi", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/SA.json"),
+            PlaylistSource("bittv-sp", "⚽ Sports", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/SP.json"),
+            PlaylistSource("bittv-mi", "\uD83C\uDFAC Movies", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/MI.json"),
+            PlaylistSource("bittv-kd", "\uD83E\uDDD2 Kids", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/KD.json"),
+            PlaylistSource("bittv-ev", "\uD83C\uDFAA Events", "https://raw.githubusercontent.com/brodatv1/jsonp/master/mio/EV.json"),
         )
         private const val PREFS = "hozintv"
         private const val KEY_CUSTOM = "custom_sources"
@@ -62,7 +78,7 @@ class PlaylistRepository(private val context: Context) {
         } catch (e: Exception) { /* abaikan */ }
     }
 
-    fun getLastSourceId(): String = prefs.getString(KEY_LAST, "bittv") ?: "bittv"
+    fun getLastSourceId(): String = prefs.getString(KEY_LAST, "bittv-id") ?: "bittv-id"
     fun setLastSourceId(id: String) = prefs.edit().putString(KEY_LAST, id).apply()
 
     /** Download playlist (M3U atau JSON ala BitTV); kalau gagal dan ada cache, pakai cache. */
